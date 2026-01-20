@@ -2,34 +2,37 @@
 
 
 
-WG Working Group                                              Y. N. Here
-Internet-Draft                                    Your Organization Here
-Intended status: Informational                            5 January 2026
-Expires: 9 July 2026
+Audio/Video Transport Core Maintenance                        S. Dawkins
+Internet-Draft                        Wonder Hamster Internetworking LLC
+Intended status: Experimental                            20 January 2026
+Expires: 24 July 2026
 
 
-                           TODO - Your title
-                  draft-todo-yourname-protocol-latest
+    RoQ Candidates with Interactive Connectivity Establishment (ICE)
+                  draft-dawkins-avtcore-roq-ice-latest
 
 Abstract
 
-   TODO Abstract
+   This document describes the use of Interactive Connectivity
+   Establishment (ICE) procedures to select candidate paths for use with
+   RTP over QUIC (RoQ).
 
 About This Document
 
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at
-   https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-todo-yourname-
-   protocol/.
+   https://SpencerDawkins.github.io/roq-ice/draft-dawkins-avtcore-roq-
+   ice.html.  Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-dawkins-avtcore-roq-ice/.
 
-   Discussion of this document takes place on the WG Working Group
-   mailing list (mailto:WG@example.com), which is archived at
-   https://example.com/WG.
+   Discussion of this document takes place on the Audio/Video Transport
+   Core Maintenance Working Group mailing list (mailto:avt@ietf.org),
+   which is archived at https://mailarchive.ietf.org/arch/browse/avt/.
+   Subscribe at https://www.ietf.org/mailman/listinfo/avt/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/USER/REPO.
+   https://github.com/SpencerDawkins/roq-ice.
 
 Status of This Memo
 
@@ -46,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 July 2026.
+   This Internet-Draft will expire on 24 July 2026.
 
 Copyright Notice
 
@@ -66,15 +69,22 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Security Considerations
-   4.  IANA Considerations
-   5.  Normative References
+     2.1.  Notes for Readers
+   3.  Background
+   4.  Additional Application Considerations for RoQ ICE Usage
+   5.  Security Considerations
+   6.  IANA Considerations
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Acknowledgments
    Author's Address
 
 1.  Introduction
 
-   TODO Introduction
+   This document describes the use of Interactive Connectivity
+   Establishment (ICE) procedures ([RFC8445]) to select candidate paths
+   for use with RTP over QUIC (RoQ) ([I-D.ietf-avtcore-rtp-over-quic]).
 
 2.  Conventions and Definitions
 
@@ -84,31 +94,155 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-3.  Security Considerations
+2.1.  Notes for Readers
 
-   TODO Security
+   (Note to RFC Editor - if this document ever reaches you, please
+   remove this section)
 
-4.  IANA Considerations
+   SDP for RoQ is defined in a separate document
+   [I-D.draft-ietf-avtcore-sdp-roq], which mentions use of ICE with RoQ.
+   This document describes how RoQ implementations would use ICE
+   candidates as part of RoQ RTP session setup.  That description might
+   reasonably be folded back into [I-D.draft-ietf-avtcore-sdp-roq] at
+   some point, but is currently separated to allow QUIC experts and ICE
+   experts to review the description without having to excavate it as
+   part of a larger specification.
 
-   This document has no IANA actions.
+   This document has not yet been adopted by any IETF working group, so
+   does not carry any special status within the IETF.
 
-5.  Normative References
+3.  Background
+
+   The QUIC transport protocol ([RFC9000]) is encapsulated in UDP
+   ([RFC768], [RFC2460]), so in theory, a RoQ endpoint could use ICE
+   procedures to identify candidate endpoint addresses and choose among
+   them.
+
+   While that would work in theory, in practice, network operators
+   expressed concern that STUN ([RFC5389]) and TURN ([RFC5766]) servers
+   configured for characteristic UDP traffic (for example, query-
+   response protocols such as DNS ([RFC1034])) would need to know that
+   RoQ endpoints expected to use ICE candidate addresses for realtime
+   media flows, in order to respond appropriately.
+
+   This specification defines a new ICE Transport Protocol (Section 6),
+   so that these servers can identify RoQ flows, and provides additional
+   application considerations (Section 4) when ICE is used for RoQ
+   flows.
+
+4.  Additional Application Considerations for RoQ ICE Usage
+
+5.  Security Considerations
+
+   The Security Considerations contained in [RFC8445], [RFC6445],
+   [RFC9000], and ([I-D.ietf-avtcore-rtp-over-quic]) are included here
+   by reference.
+
+6.  IANA Considerations
+
+   IANA has created a sub-registry "ICE Transport Protocols" in the
+   "Interactive Connectivity Establishment (ICE)" registry for ICE
+   candidate-attribute transport extensions.  This specification adds
+   the "RoQ" token to that registry.
+
+                     +=======+======================+
+                     | Token | Reference            |
+                     +=======+======================+
+                     | RoQ   | {This Specification) |
+                     +-------+----------------------+
+
+                                 Table 1
+
+7.  References
+
+7.1.  Normative References
+
+   [I-D.ietf-avtcore-rtp-over-quic]
+              Engelbart, M., Ott, J., and S. Dawkins, "RTP over QUIC
+              (RoQ)", Work in Progress, Internet-Draft, draft-ietf-
+              avtcore-rtp-over-quic-14, 20 March 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-avtcore-
+              rtp-over-quic-14>.
+
+   [ICE-protos]
+              "ICE Transport Protocols", September 2021,
+              <https://www.iana.org/assignments/ice/ice.xhtml#transport-
+              extensions>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
+   [RFC2460]  Deering, S. and R. Hinden, "Internet Protocol, Version 6
+              (IPv6) Specification", RFC 2460, DOI 10.17487/RFC2460,
+              December 1998, <https://www.rfc-editor.org/rfc/rfc2460>.
+
+   [RFC6445]  Nadeau, T., Ed., Koushik, A., Ed., and R. Cetin, Ed.,
+              "Multiprotocol Label Switching (MPLS) Traffic Engineering
+              Management Information Base for Fast Reroute", RFC 6445,
+              DOI 10.17487/RFC6445, November 2011,
+              <https://www.rfc-editor.org/rfc/rfc6445>.
+
+   [RFC6544]  Rosenberg, J., Keranen, A., Lowekamp, B. B., and A. B.
+              Roach, "TCP Candidates with Interactive Connectivity
+              Establishment (ICE)", RFC 6544, DOI 10.17487/RFC6544,
+              March 2012, <https://www.rfc-editor.org/rfc/rfc6544>.
+
+   [RFC768]   Postel, J., "User Datagram Protocol", STD 6, RFC 768,
+              DOI 10.17487/RFC0768, August 1980,
+              <https://www.rfc-editor.org/rfc/rfc768>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
+   [RFC8445]  Keranen, A., Holmberg, C., and J. Rosenberg, "Interactive
+              Connectivity Establishment (ICE): A Protocol for Network
+              Address Translator (NAT) Traversal", RFC 8445,
+              DOI 10.17487/RFC8445, July 2018,
+              <https://www.rfc-editor.org/rfc/rfc8445>.
+
+   [RFC9000]  Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
+              Multiplexed and Secure Transport", RFC 9000,
+              DOI 10.17487/RFC9000, May 2021,
+              <https://www.rfc-editor.org/rfc/rfc9000>.
+
+7.2.  Informative References
+
+   [I-D.draft-ietf-avtcore-sdp-roq]
+              Dawkins, S. and V. P. Pascual, "SDP Offer/Answer for RTP
+              over QUIC (RoQ)", Work in Progress, Internet-Draft, draft-
+              ietf-avtcore-sdp-roq-00, 11 October 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-avtcore-
+              sdp-roq-00>.
+
+   [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
+              STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
+              <https://www.rfc-editor.org/rfc/rfc1034>.
+
+   [RFC5389]  Rosenberg, J., Mahy, R., Matthews, P., and D. Wing,
+              "Session Traversal Utilities for NAT (STUN)", RFC 5389,
+              DOI 10.17487/RFC5389, October 2008,
+              <https://www.rfc-editor.org/rfc/rfc5389>.
+
+   [RFC5766]  Mahy, R., Matthews, P., and J. Rosenberg, "Traversal Using
+              Relays around NAT (TURN): Relay Extensions to Session
+              Traversal Utilities for NAT (STUN)", RFC 5766,
+              DOI 10.17487/RFC5766, April 2010,
+              <https://www.rfc-editor.org/rfc/rfc5766>.
+
 Acknowledgments
 
-   TODO acknowledge.
+   This draft builds on previous work that resulted in the base
+   "Interactive Connectivity Establishment (ICE)" specification
+   ([RFC8445]) and the related "TCP Candidates with Interactive
+   Connectivity Establishment (ICE)" specification [RFC6544].  The
+   author of this specification owes those authors many thanks.
 
 Author's Address
 
-   Your Name Here
-   Your Organization Here
-   Email: your.email@example.com
+   Spencer Dawkins
+   Wonder Hamster Internetworking LLC
+   United States of America
+   Email: spencerdawkins.ietf@gmail.com
