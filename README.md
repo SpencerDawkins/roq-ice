@@ -1,8 +1,8 @@
 <!-- regenerate: on (set to off if you edit this file) -->
 
-# TODO - Your title
+# draft-dawkins-avtcore-roq-ice
 
-This is the working area for the individual Internet-Draft, "TODO - Your title".
+This is the working area for the individual Internet-Draft, "RoQ Candidates with Interactive Connectivity Establishment (ICE)".
 
 * [Editor's Copy](https://SpencerDawkins.github.io/roq-ice/#go.draft-dawkins-avtcore-roq-ice.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-dawkins-avtcore-roq-ice)
