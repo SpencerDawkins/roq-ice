@@ -74,7 +74,7 @@ The intention for ICE usage to identify RoQ candidates is that it should be as s
 
 # Additional Application Considerations for RoQ ICE Usage {#appcons}
 
-The reason for defining a new ICE Transport Protocol identifier is to allow ICE endpoints to distriguish between candidates for RTP media flows encapsulated in UDP and candidates for RTP media flows encapsulated in RoQ. Without a new ICE Transport Identifier, it is difficult to tell the difference, because RoQ is encapsulated in QUIC, and then in UDP.
+The reason for defining a new ICE Transport Protocol identifier is to allow ICE endpoints to distiguish between candidates for RTP media flows encapsulated in UDP and candidates for RTP media flows encapsulated in RoQ. Without a new ICE Transport Identifier, it is difficult to tell the difference, because RoQ is encapsulated in QUIC, and then in UDP.
 
 Because UDP is very close to a null transport protocol (allowing port multiplexing, but not much more), and QUIC is a modern transport protocol, there are differences that application developers need to be aware of, in ICE candidate selection. These differences are described in this section.
 
