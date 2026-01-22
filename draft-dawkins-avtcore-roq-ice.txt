@@ -140,7 +140,7 @@ Table of Contents
 4.  Additional Application Considerations for RoQ ICE Usage
 
    The reason for defining a new ICE Transport Protocol identifier is to
-   allow ICE endpoints to distriguish between candidates for RTP media
+   allow ICE endpoints to distiguish between candidates for RTP media
    flows encapsulated in UDP and candidates for RTP media flows
    encapsulated in RoQ.  Without a new ICE Transport Identifier, it is
    difficult to tell the difference, because RoQ is encapsulated in

@@ -1245,7 +1245,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-additional-application-cons">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-additional-application-cons" class="section-name selfRef">Additional Application Considerations for RoQ ICE Usage</a>
       </h2>
-<p id="section-4-1">The reason for defining a new ICE Transport Protocol identifier is to allow ICE endpoints to distriguish between candidates for RTP media flows encapsulated in UDP and candidates for RTP media flows encapsulated in RoQ. Without a new ICE Transport Identifier, it is difficult to tell the difference, because RoQ is encapsulated in QUIC, and then in UDP.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">The reason for defining a new ICE Transport Protocol identifier is to allow ICE endpoints to distiguish between candidates for RTP media flows encapsulated in UDP and candidates for RTP media flows encapsulated in RoQ. Without a new ICE Transport Identifier, it is difficult to tell the difference, because RoQ is encapsulated in QUIC, and then in UDP.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">Because UDP is very close to a null transport protocol (allowing port multiplexing, but not much more), and QUIC is a modern transport protocol, there are differences that application developers need to be aware of, in ICE candidate selection. These differences are described in this section.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-4-3.1">
